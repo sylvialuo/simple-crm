@@ -10,6 +10,7 @@ const AddButton = () => {
   return (
     <Tooltip title="Add a customer" arrow>
       <IconButton
+        data-testid="add-button"
         onClick={() => {
           dispatch(
             changeCustomerPopupStatus({ isOpen: true, pageName: "ADD" })

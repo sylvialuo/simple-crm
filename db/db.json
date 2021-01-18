@@ -1,40 +1,22 @@
 {
   "customers": [
     {
-      "id": 1,
       "firstName": "Simon",
       "lastName": "Qi",
-      "dob": "2021-01-06"
+      "dob": "2021-01-06",
+      "id": 1
     },
     {
-      "id": 3,
       "firstName": "Jessie",
       "lastName": "Green",
-      "dob": "2021-01-06"
+      "dob": "2021-01-08",
+      "id": 2
     },
     {
-      "id": 4,
-      "firstName": "Jim",
-      "lastName": "Brown",
-      "dob": "2021-01-06"
-    },
-    {
-      "id": 5,
-      "firstName": "Marry",
+      "firstName": "Mary",
       "lastName": "Watt",
-      "dob": "2021-01-06"
-    },
-    {
-      "firstName": "zxvdf",
-      "lastName": "sfsdfd",
-      "dob": "2021-01-11",
-      "id": 9
-    },
-    {
-      "firstName": "ggdf",
-      "lastName": "bvcb",
-      "dob": "2021-01-19",
-      "id": 11
+      "dob": "2021-01-07",
+      "id": 3
     }
   ]
 }

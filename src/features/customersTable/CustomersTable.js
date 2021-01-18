@@ -13,6 +13,7 @@ import {
 import CustomersTableRow from "./CustomersTableRow";
 import { getCustomers, selectCustomers } from "./customersSlice";
 import { useDebounce } from "../../utils";
+import { NoContentWrapper, NoContentTypography } from "./CustomersTable.styles";
 
 export const getSearchedCustomers = (searchValue, customers) => {
   if (!searchValue) return customers;
@@ -35,25 +36,35 @@ const CustomersTable = ({ searchValue }) => {
     customers
   );
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="customer table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">Customer ID</TableCell>
-            <TableCell align="center">First Name</TableCell>
-            <TableCell align="center">Last Name</TableCell>
-            <TableCell align="center">Date of Birth</TableCell>
-            <TableCell align="center">Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {searchedCustomers.length !== 0 &&
-            searchedCustomers.map((customer) => (
-              <CustomersTableRow customer={customer} key={customer.id} />
-            ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      {searchedCustomers.length === 0 ? (
+        <NoContentWrapper>
+          <NoContentTypography variant="body1">
+            There is no exist customer or no matched customer.
+          </NoContentTypography>
+        </NoContentWrapper>
+      ) : (
+        <TableContainer component={Paper}>
+          <Table aria-label="customer-table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">Customer ID</TableCell>
+                <TableCell align="center">First Name</TableCell>
+                <TableCell align="center">Last Name</TableCell>
+                <TableCell align="center">Date of Birth</TableCell>
+                <TableCell align="center">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {searchedCustomers.length !== 0 &&
+                searchedCustomers.map((customer) => (
+                  <CustomersTableRow customer={customer} key={customer.id} />
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </>
   );
 };
 

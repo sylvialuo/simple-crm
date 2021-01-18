@@ -1,8 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  Button,
-  TextField,
   Dialog,
   DialogActions,
   DialogContent,
@@ -18,6 +16,13 @@ import {
   selectCustomerTemp,
   customerTempEditted,
 } from "./customersSlice";
+import {
+  PopupTextField,
+  TextFieldWrapper,
+  ButtonWrapper,
+  PopupButton,
+  PopupWrapper,
+} from "./CustomersTable.styles";
 
 const CustomerPopup = () => {
   const dispatch = useDispatch();
@@ -33,84 +38,98 @@ const CustomerPopup = () => {
       }
       aria-labelledby="customer-popup-title"
     >
-      <DialogTitle id="customer-popup-title">{`${pageName} A CUSTOMER`}</DialogTitle>
-      <DialogContent>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="firstName"
-          label="First Name"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          value={customerTemp.firstName}
-          onChange={(e) =>
-            dispatch(
-              customerTempEditted({ key: "firstName", value: e.target.value })
-            )
-          }
-        />
-        <TextField
-          autoFocus
-          margin="dense"
-          id="lastName"
-          label="Last Name"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          value={customerTemp.lastName}
-          onChange={(e) =>
-            dispatch(
-              customerTempEditted({ key: "lastName", value: e.target.value })
-            )
-          }
-        />
-        <TextField
-          autoFocus
-          type="date"
-          margin="dense"
-          id="dob"
-          label="Date of Birth"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          value={customerTemp.dob}
-          onChange={(e) =>
-            dispatch(customerTempEditted({ key: "dob", value: e.target.value }))
-          }
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button
-          onClick={() => {
-            dispatch(
-              changeCustomerPopupStatus({
-                isOpen: false,
-                pageName: null,
-              })
-            );
-          }}
-          color="primary"
-        >
-          Cancel
-        </Button>
-        <Button
-          onClick={() => {
-            isEditPage
-              ? dispatch(editACustomer(customerTemp))
-              : dispatch(addACustomer(customerTemp));
-            dispatch(
-              changeCustomerPopupStatus({
-                isOpen: false,
-                pageName: null,
-              })
-            );
-          }}
-          color="primary"
-        >
-          Save
-        </Button>
-      </DialogActions>
+      <PopupWrapper>
+        <DialogTitle id="customer-popup-title">{`${pageName} A CUSTOMER`}</DialogTitle>
+        <DialogContent>
+          <TextFieldWrapper>
+            <PopupTextField
+              data-testid="firstName"
+              margin="dense"
+              id="firstName"
+              label="First Name"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={customerTemp.firstName}
+              onChange={(e) =>
+                dispatch(
+                  customerTempEditted({
+                    key: "firstName",
+                    value: e.target.value,
+                  })
+                )
+              }
+            />
+            <PopupTextField
+              data-testid="lastName"
+              margin="dense"
+              id="lastName"
+              label="Last Name"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={customerTemp.lastName}
+              onChange={(e) =>
+                dispatch(
+                  customerTempEditted({
+                    key: "lastName",
+                    value: e.target.value,
+                  })
+                )
+              }
+            />
+            <PopupTextField
+              data-testid="dob"
+              type="date"
+              margin="dense"
+              id="dob"
+              label="Date of Birth"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={customerTemp.dob}
+              onChange={(e) =>
+                dispatch(
+                  customerTempEditted({ key: "dob", value: e.target.value })
+                )
+              }
+            />
+          </TextFieldWrapper>
+        </DialogContent>
+        <DialogActions>
+          <ButtonWrapper>
+            <PopupButton
+              onClick={() => {
+                dispatch(
+                  changeCustomerPopupStatus({
+                    isOpen: false,
+                    pageName: null,
+                  })
+                );
+              }}
+              data-testid="cancel-button"
+            >
+              Cancel
+            </PopupButton>
+            <PopupButton
+              onClick={() => {
+                isEditPage
+                  ? dispatch(editACustomer(customerTemp))
+                  : dispatch(addACustomer(customerTemp));
+                dispatch(
+                  changeCustomerPopupStatus({
+                    isOpen: false,
+                    pageName: null,
+                  })
+                );
+              }}
+              data-testid="save-button"
+            >
+              Save
+            </PopupButton>
+          </ButtonWrapper>
+        </DialogActions>
+      </PopupWrapper>
     </Dialog>
   );
 };

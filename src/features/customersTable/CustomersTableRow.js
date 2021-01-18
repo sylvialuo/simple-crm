@@ -21,6 +21,7 @@ const CustomersTableRow = ({ customer }) => {
         <ActionsWrapper>
           <Tooltip title="Edit a customer" arrow>
             <IconButton
+              data-testid="edit-button"
               onClick={() => {
                 dispatch(
                   changeCustomerPopupStatus({
@@ -35,7 +36,10 @@ const CustomersTableRow = ({ customer }) => {
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete a customer" arrow>
-            <IconButton onClick={() => dispatch(deleteACustomer(customer.id))}>
+            <IconButton
+              data-testid="delete-button"
+              onClick={() => dispatch(deleteACustomer(customer.id))}
+            >
               <StyledDeleteIcon />
             </IconButton>
           </Tooltip>

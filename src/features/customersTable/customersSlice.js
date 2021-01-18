@@ -1,7 +1,8 @@
-import Axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+import axios from "../../http";
+
+export const initialState = {
   customers: [],
   isLoading: false,
   isCustomerPopupOpen: false,
@@ -12,20 +13,6 @@ const initialState = {
     dob: "",
   },
   searchValue: "",
-};
-
-const normalizeById = (customers) => {
-  const allCustomers = customers.reduce(
-    (acc, cur) => ({
-      ...acc,
-      [cur.id]: { ...cur },
-    }),
-    {}
-  );
-
-  const allIds = customers.map((c) => c.id);
-
-  return { allCustomers, allIds };
 };
 
 export const customersSlice = createSlice({
@@ -82,10 +69,6 @@ export const {
   customerPopupState,
   customerTempEditted,
 } = customersSlice.actions;
-
-const axios = Axios.create({
-  baseURL: "http://localhost:3001",
-});
 
 export const getCustomers = () => (dispatch) => {
   dispatch(requestStarted());
